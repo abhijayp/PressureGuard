@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Problem — PressureGuard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;550;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">Pressure<span>Guard</span></a>
+      <div class="nav-links">
+        <a href="problem.html" class="nav-link active">The Problem</a>
+        <a href="how-it-works.html" class="nav-link">How It Works</a>
+        <a href="prototype.html" class="nav-link">The Prototype</a>
+        <a href="research.html" class="nav-link">Research</a>
+        <a href="future-impact.html" class="nav-link">Future Impact</a>
+      </div>
+      <button class="mobile-toggle" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu">
+  <a href="problem.html" class="nav-link">The Problem</a>
+  <a href="how-it-works.html" class="nav-link">How It Works</a>
+  <a href="prototype.html" class="nav-link">The Prototype</a>
+  <a href="research.html" class="nav-link">Research</a>
+  <a href="future-impact.html" class="nav-link">Future Impact</a>
+</div>
+
+<section class="problem-intro">
+  <div class="container">
+    <span class="section-label fade-in">The Problem</span>
+    <h1 class="section-title fade-in delay-1" style="max-width:800px">Pressure injuries remain one of healthcare's most preventable complications.</h1>
+    <p class="section-copy fade-in delay-2">Patients who remain seated or bedridden for extended periods experience sustained tissue compression between bone and external surfaces. Over time, prolonged pressure restricts circulation, increases localized stress accumulation, and elevates the risk of tissue breakdown.</p>
+
+    <div class="problem-cards">
+      <div class="card fade-in delay-1">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Pressure + Duration</h3>
+        <p>Pressure injuries are influenced not only by force magnitude, but also by how long tissue remains compressed without relief. Continuous exposure over time significantly increases injury risk, making temporal tracking essential for early detection.</p>
+      </div>
+      <div class="card fade-in delay-2">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3>Accessibility Gap</h3>
+        <p>Advanced monitoring systems used in clinical environments can cost thousands of dollars, limiting adoption in underfunded hospitals, rehabilitation facilities, and home healthcare settings where patients need protection most.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="problem-details">
+  <div class="container">
+    <span class="section-label fade-in">Why It Matters</span>
+    <h2 class="section-title fade-in delay-1">Existing systems are reactive, not predictive.</h2>
+    <p class="section-copy fade-in delay-2">Most clinical approaches rely on scheduled manual repositioning or visual skin assessments. By the time tissue damage is detected, it has often already begun. A predictive approach that continuously monitors pressure distribution and exposure duration could intervene before injury occurs.</p>
+
+    <div class="detail-grid">
+      <div class="detail-card fade-in delay-1">
+        <h4>2.5 million cases annually</h4>
+        <p>Pressure injuries affect approximately 2.5 million patients in the United States each year, contributing to extended hospital stays, increased care costs, and in severe cases, life-threatening complications.</p>
+      </div>
+      <div class="detail-card fade-in delay-2">
+        <h4>$26.8 billion in annual costs</h4>
+        <p>The financial burden of treating pressure injuries across the U.S. healthcare system is substantial, making prevention not only a clinical priority but also an economic imperative for healthcare institutions.</p>
+      </div>
+      <div class="detail-card fade-in delay-1">
+        <h4>Manual assessment limitations</h4>
+        <p>Current prevention protocols depend heavily on nursing staff performing visual skin inspections and scheduled repositioning. These methods are labor-intensive, inconsistent, and unable to capture the continuous data needed for early intervention.</p>
+      </div>
+      <div class="detail-card fade-in delay-2">
+        <h4>Technology cost barriers</h4>
+        <p>Smart bed and mattress overlay systems that do offer continuous monitoring typically cost $10,000 to $30,000 per unit, placing them beyond the reach of most care facilities and entirely inaccessible for home care patients.</p>
+      </div>
+    </div>
+
+    <div class="viz-placeholder fade-in">
+      Data visualization placeholder &mdash; pressure distribution analysis
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-text">PressureGuard &mdash; National Innovator Challenge 2026</span>
+      <div class="footer-links">
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="research.html" class="footer-link">Research</a>
+        <a href="future-impact.html" class="footer-link">Future Impact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

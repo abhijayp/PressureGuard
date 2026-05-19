@@ -1,672 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-<title>PressureGuard</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PressureGuard — Predictive Tissue Stress Monitoring</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:'Inter',sans-serif;
-    background:#0b0f14;
-    color:#f4f4f2;
-    overflow-x:hidden;
-    -webkit-font-smoothing:antialiased;
-}
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-button{
-    font-family:'Inter',sans-serif;
-}
-
-.container{
-    width:100%;
-    max-width:1380px;
-    margin:auto;
-    padding:0 56px;
-}
-
-.background{
-    position:fixed;
-    inset:0;
-    z-index:-2;
-    background:
-    radial-gradient(circle at top left, rgba(37,99,235,.10), transparent 30%),
-    radial-gradient(circle at bottom right, rgba(255,255,255,.03), transparent 25%),
-    #0b0f14;
-}
-
-.noise{
-    position:fixed;
-    inset:0;
-    z-index:-1;
-    opacity:.03;
-    background-image:url("https://grainy-gradients.vercel.app/noise.svg");
-}
-
-nav{
-    width:100%;
-    position:sticky;
-    top:0;
-    z-index:1000;
-    backdrop-filter:blur(14px);
-    background:rgba(11,15,20,.72);
-    border-bottom:1px solid rgba(255,255,255,.05)
-    #problemPage
-    scroll-margin-top:100px;
-}
-
-.nav-inner{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:24px 0;
-}
-
-.logo{
-    font-size:1rem;
-    font-weight:600;
-    letter-spacing:-.3px;
-}
-
-.logo span{
-    color:#6ea8ff;
-}
-
-.nav-links{
-    display:flex;
-    gap:34px;
-}
-
-.nav-links button{
-    background:none;
-    border:none;
-    color:#8d98a7;
-    font-size:.93rem;
-    cursor:pointer;
-    transition:.2s ease;
-}
-
-.nav-links button:hover{
-    color:white;
-}
-
-.hero{
-    min-height:90vh;
-    display:flex;
-    align-items:center;
-}
-
-.hero-grid{
-    width:100%;
-    display:grid;
-    grid-template-columns:1.05fr .95fr;
-    gap:80px;
-    align-items:center;
-    padding:80px 0 120px;
-}
-
-.label{
-    color:#6ea8ff;
-    font-size:.82rem;
-    text-transform:uppercase;
-    letter-spacing:1.8px;
-    margin-bottom:28px;
-    font-weight:600;
-}
-
-h1{
-    font-size:clamp(3rem,8vw,5.8rem);;
-    line-height:.93;
-    letter-spacing:-4px;
-    font-weight:600;
-    max-width:760px;
-    margin-bottom:34px;
-}
-
-.hero-copy{
-    max-width:620px;
-    color:#97a3b4;
-    line-height:1.9;
-    font-size:1.06rem;
-    margin-bottom:42px;
-}
-
-.hero-buttons{
-    display:flex;
-    gap:16px;
-    flex-wrap:wrap;
-}
-
-.primary-btn{
-    border:none;
-    background:#f3f4f6;
-    color:#0b0f14;
-    padding:15px 22px;
-    border-radius:10px;
-    font-size:.95rem;
-    cursor:pointer;
-    font-weight:600;
-    transition:.25s ease;
-}
-
-.primary-btn:hover{
-    transform:translateY(-1px);
-}
-
-.secondary-btn{
-    border:1px solid rgba(255,255,255,.08);
-    background:transparent;
-    color:#d7dce3;
-    padding:15px 22px;
-    border-radius:10px;
-    font-size:.95rem;
-    cursor:pointer;
-    transition:.25s ease;
-}
-
-.secondary-btn:hover{
-    border-color:rgba(255,255,255,.16);
-    background:rgba(255,255,255,.03);
-}
-
-.stats{
-    display:flex;
-    gap:54px;
-    margin-top:72px;
-    flex-wrap:wrap;
-}
-
-.stat h2{
-    font-size:2.9rem;
-    font-weight:600;
-    letter-spacing:-2px;
-    margin-bottom:6px;
-}
-
-.stat p{
-    color:#6f7c8e;
-    font-size:.92rem;
-}
-
-.visual-panel{
-    width:100%;
-    height:640px;
-    border-radius:22px;
-    border:1px solid rgba(255,255,255,.06);
-    background:
-    linear-gradient(
-    180deg,
-    rgba(255,255,255,.03),
-    rgba(255,255,255,.015)
-    );
-    position:relative;
-    overflow:hidden;
-}
-
-.visual-top{
-    width:100%;
-    padding:20px 22px;
-    border-bottom:1px solid rgba(255,255,255,.05);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.visual-title{
-    font-size:.92rem;
-    color:#d7dce3;
-}
-
-.live{
-    font-size:.82rem;
-    color:#6ea8ff;
-}
-
-.visual-content{
-    padding:26px;
-    height:calc(100% - 68px);
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-}
-
-.sensor-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-}
-
-.sensor{
-    aspect-ratio:1;
-    border-radius:14px;
-    background:#111823;
-    border:1px solid rgba(255,255,255,.04);
-}
-
-.sensor.active{
-    background:linear-gradient(
-    135deg,
-    rgba(59,130,246,.55),
-    rgba(59,130,246,.08)
-    );
-}
-
-.large-placeholder{
-    width:100%;
-    height:220px;
-    border-radius:18px;
-    border:1px dashed rgba(255,255,255,.08);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#657286;
-    font-size:.92rem;
-}
-
-.divider{
-    width:100%;
-    height:1px;
-    background:rgba(255,255,255,.05);
-}
-
-.problem-section{
-    padding:120px 0;
-}
-
-.problem-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:28px;
-    margin-top:54px;
-}
-
-.problem-card{
-    background:#101720;
-    border:1px solid rgba(255,255,255,.05);
-    border-radius:18px;
-    padding:34px;
-}
-
-.problem-card h3{
-    font-size:1.35rem;
-    margin-bottom:18px;
-    font-weight:600;
-    letter-spacing:-.5px;
-}
-
-.problem-card p{
-    color:#93a0b1;
-    line-height:1.85;
-    font-size:.98rem;
-}
-
-footer{
-    padding:34px 0;
-    color:#677487;
-    font-size:.9rem;
-}
-
-.coming-soon{
-    min-height:100vh;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    text-align:center;
-    padding:40px;
-}
-
-.coming-soon h1{
-    font-size:4rem;
-    letter-spacing:-2px;
-    margin-bottom:18px;
-}
-
-.coming-soon p{
-    color:#8f9bae;
-    margin-bottom:28px;
-}
-
-@media(max-width:1150px){
-
-    h1{
-        font-size:4.4rem;
-    }
-
-    .hero-grid{
-        grid-template-columns:1fr;
-    }
-
-    .visual-panel{
-        height:560px;
-    }
-
-    .problem-grid{
-        grid-template-columns:1fr;
-    }
-
-}
-
-@media(max-width:768px){
-
-    .container{
-        padding:0 24px;
-    }
-
-    .nav-links{
-        display:none;
-    }
-
-    h1{
-        font-size:3.4rem;
-        letter-spacing:-3px;
-    }
-
-    .stats{
-        gap:34px;
-    }
-
-}
-
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;550;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-<div class="background"></div>
-<div class="noise"></div>
-
-<div id="mainPage">
-
-<nav>
-
-<div class="container">
-
-<div class="nav-inner">
-
-<div class="logo">
-Pressure<span>Guard</span>
-</div>
-
-<div class="nav-links">
-
-<button onclick="showProblemPage()">
-The Problem
-</button>
-
-<button onclick="showComingSoon('How It Works')">
-How It Works
-</button>
-
-<button onclick="showComingSoon('The Prototype')">
-The Prototype
-</button>
-
-<button onclick="showComingSoon('Research')">
-Research
-</button>
-
-<button onclick="showComingSoon('Future Impact')">
-Future Impact
-</button>
-
-</div>
-
-</div>
-
-</div>
-
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">Pressure<span>Guard</span></a>
+      <div class="nav-links">
+        <a href="problem.html" class="nav-link">The Problem</a>
+        <a href="how-it-works.html" class="nav-link">How It Works</a>
+        <a href="prototype.html" class="nav-link">The Prototype</a>
+        <a href="research.html" class="nav-link">Research</a>
+        <a href="future-impact.html" class="nav-link">Future Impact</a>
+      </div>
+      <button class="mobile-toggle" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
 </nav>
 
+<div class="mobile-menu">
+  <a href="problem.html" class="nav-link">The Problem</a>
+  <a href="how-it-works.html" class="nav-link">How It Works</a>
+  <a href="prototype.html" class="nav-link">The Prototype</a>
+  <a href="research.html" class="nav-link">Research</a>
+  <a href="future-impact.html" class="nav-link">Future Impact</a>
+</div>
+
 <section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow fade-in">Predictive Tissue Stress Monitoring</span>
+        <h1 class="fade-in delay-1">Monitoring pressure before tissue damage begins.</h1>
+        <p class="hero-copy fade-in delay-2">PressureGuard is a low-cost predictive monitoring platform designed to analyze pressure exposure, duration, and tissue stress accumulation in real time. By combining continuous sensor input with temporal modeling, the system explores a more accessible approach to early pressure injury prevention.</p>
+        <div class="btn-group fade-in delay-3">
+          <a href="problem.html" class="btn btn-primary">Explore The Problem</a>
+          <a href="prototype.html" class="btn btn-secondary">View Prototype</a>
+        </div>
+        <div class="stats fade-in delay-3">
+          <div>
+            <div class="stat-value">2.5M</div>
+            <div class="stat-label">pressure injuries annually</div>
+          </div>
+          <div>
+            <div class="stat-value">24/7</div>
+            <div class="stat-label">continuous monitoring</div>
+          </div>
+          <div>
+            <div class="stat-value">&lt;$25</div>
+            <div class="stat-label">prototype material cost</div>
+          </div>
+        </div>
+      </div>
 
-<div class="container">
-
-<div class="hero-grid">
-
-<div>
-
-<div class="label">
-Predictive Tissue Stress Monitoring
-</div>
-
-<h1>
-Monitoring pressure before tissue damage begins.
-</h1>
-
-<p class="hero-copy">
-PressureGuard is a low-cost predictive monitoring platform designed to analyze pressure exposure, duration, and tissue stress accumulation in real time. By combining continuous sensor input with temporal modeling, the system explores a more accessible approach to early pressure injury prevention.
-</p>
-
-<div class="hero-buttons">
-
-<button class="primary-btn" onclick="showProblemPage()">
-Explore The Problem
-</button>
-
-<button class="secondary-btn" onclick="showComingSoon('Prototype Demo')">
-View Prototype
-</button>
-
-</div>
-
-<div class="stats">
-
-<div class="stat">
-<h2>2.5M</h2>
-<p>pressure injuries annually</p>
-</div>
-
-<div class="stat">
-<h2>24/7</h2>
-<p>continuous monitoring</p>
-</div>
-
-<div class="stat">
-<h2>&lt;$25</h2>
-<p>prototype material cost</p>
-</div>
-
-</div>
-
-</div>
-
-<div>
-
-<div class="visual-panel">
-
-<div class="visual-top">
-
-<div class="visual-title">
-Live Sensor Matrix
-</div>
-
-<div class="live">
-ACTIVE
-</div>
-
-</div>
-
-<div class="visual-content">
-
-<div class="sensor-grid">
-
-<div class="sensor active"></div>
-<div class="sensor"></div>
-<div class="sensor"></div>
-<div class="sensor active"></div>
-
-<div class="sensor"></div>
-<div class="sensor active"></div>
-<div class="sensor active"></div>
-<div class="sensor"></div>
-
-<div class="sensor"></div>
-<div class="sensor active"></div>
-<div class="sensor"></div>
-<div class="sensor"></div>
-
-<div class="sensor"></div>
-<div class="sensor"></div>
-<div class="sensor active"></div>
-<div class="sensor"></div>
-
-</div>
-
-<div class="large-placeholder">
-Prototype / Dashboard Visualization Placeholder
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+      <div class="fade-in delay-2">
+        <div class="dashboard">
+          <div class="dash-header">
+            <span class="dash-title">Live Sensor Matrix</span>
+            <span class="dash-status"><span class="dash-dot"></span> Active</span>
+          </div>
+          <div class="dash-body">
+            <div class="sensor-matrix">
+              <div class="sensor-cell low"></div>
+              <div class="sensor-cell"></div>
+              <div class="sensor-cell"></div>
+              <div class="sensor-cell mid"></div>
+              <div class="sensor-cell"></div>
+              <div class="sensor-cell"></div>
+              <div class="sensor-cell"></div>
+              <div class="sensor-cell low"></div>
+              <div class="sensor-cell high"></div>
+              <div class="sensor-cell"></div>
+              <div class="sensor-cell"></div>
+              <div class="sensor-cell"></div>
+              <div class="sensor-cell"></div>
+              <div class="sensor-cell low"></div>
+              <div class="sensor-cell mid"></div>
+              <div class="sensor-cell"></div>
+              <div class="sensor-cell"></div>
+              <div class="sensor-cell"></div>
+              <div class="sensor-cell low"></div>
+              <div class="sensor-cell"></div>
+              <div class="sensor-cell"></div>
+              <div class="sensor-cell"></div>
+              <div class="sensor-cell"></div>
+              <div class="sensor-cell critical"></div>
+            </div>
+            <div class="dash-metrics">
+              <div class="metric-card">
+                <div class="metric-label">Peak Pressure</div>
+                <div class="metric-value accent">142 mmHg</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Duration</div>
+                <div class="metric-value">2h 14m</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Risk Level</div>
+                <div class="metric-value warn">Moderate</div>
+              </div>
+            </div>
+            <div class="dash-chart-area">Temporal stress chart placeholder</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<div class="divider"></div>
-
-<section class="problem-section" id="problemPage">
-
-<div class="container">
-
-<div class="label">
-The Problem
-</div>
-
-<h1 style="font-size:4.2rem; max-width:980px; margin-bottom:28px;">
-Pressure injuries remain one of healthcare’s most preventable complications.
-</h1>
-
-<p class="hero-copy" style="max-width:900px;">
-Patients who remain seated or bedridden for extended periods experience sustained tissue compression between bone and external surfaces. Over time, prolonged pressure restricts circulation, increases localized stress accumulation, and elevates the risk of tissue breakdown. Existing prevention systems are frequently expensive, inaccessible, or reactive rather than predictive.
-</p>
-
-<div class="problem-grid">
-
-<div class="problem-card">
-
-<h3>
-Pressure + Duration
-</h3>
-
-<p>
-Pressure injuries are influenced not only by force magnitude, but also by how long tissue remains compressed without relief. Continuous exposure over time significantly increases injury risk.
-</p>
-
-</div>
-
-<div class="problem-card">
-
-<h3>
-Accessibility Gap
-</h3>
-
-<p>
-Advanced monitoring systems used in clinical environments can cost thousands of dollars, limiting adoption in underfunded hospitals, rehabilitation facilities, and home healthcare settings.
-</p>
-
-</div>
-
-</div>
-
-<div class="large-placeholder" style="margin-top:28px; height:340px;">
-Research Visualization Placeholder
-</div>
-
-</div>
-
-</section>
-
-<div class="divider"></div>
-
-<footer>
-
-<div class="container">
-PressureGuard — National Innovator Challenge 2026
-</div>
-
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-text">PressureGuard &mdash; National Innovator Challenge 2026</span>
+      <div class="footer-links">
+        <a href="problem.html" class="footer-link">The Problem</a>
+        <a href="research.html" class="footer-link">Research</a>
+        <a href="future-impact.html" class="footer-link">Future Impact</a>
+      </div>
+    </div>
+  </div>
 </footer>
 
-</div>
-
-<div class="coming-soon" id="comingSoonPage">
-
-<h1 id="comingSoonTitle">
-Coming Soon
-</h1>
-
-<p>
-This section is currently under development.
-</p>
-
-<button class="primary-btn" onclick="goHome()">
-Return Home
-</button>
-
-</div>
-
-<script>
-
-function showComingSoon(pageName){
-
-document.getElementById("mainPage").style.display = "none";
-document.getElementById("comingSoonPage").style.display = "flex";
-
-document.getElementById("comingSoonTitle").innerText =
-pageName + " — Coming Soon";
-
-window.scrollTo(0,0);
-
-}
-
-function goHome(){
-
-document.getElementById("mainPage").style.display = "block";
-document.getElementById("comingSoonPage").style.display = "none";
-
-window.scrollTo(0,0);
-
-}
-
-function showProblemPage(){
-
-document.getElementById("mainPage").style.display = "block";
-document.getElementById("comingSoonPage").style.display = "none";
-
-document.getElementById("problemPage")
-.scrollIntoView({behavior:"smooth"});
-
-}
-
-</script>
-
+<script src="js/main.js"></script>
 </body>
 </html>
